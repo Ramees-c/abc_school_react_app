@@ -1,0 +1,59 @@
+.signup_section {
+  padding-top: 90px;
+  padding-bottom: 190px;
+}
+
+.signup_section .form_container {
+  width: 70%;
+  margin: 0 auto;
+  background-color: rgba(192, 192, 192, 0.121);
+  height: 300px;
+  margin-top: 70px;
+  border-radius: 8px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.signup_section .form_container .form_contents {
+  height: 300px;
+  width: 60%;
+  padding-right: 30px;
+  padding-top: 30px;
+}
+
+.signup_section .image_section {
+  width: 40%;
+}
+
+.signup_section .signup_img {
+  width: 280px;
+  height: 300px;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+
+/* .signup_section .form_container .form_section {
+    padding-top: 80px;
+    padding-right: 60px;
+} */
+
+.signup_section .form_container .form_section .signup_btn {
+  background-color: var(--primary-color);
+  border: none;
+  color: white;
+  width: 100%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 7px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.signup_section .already_account_section {
+    margin-top: 50px;
+}
+
+.signup_section .already_account_section .link {
+    text-decoration: none;
+    color: var(--primary-color);
+    font-size: 18px;
+}

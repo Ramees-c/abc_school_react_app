@@ -1,0 +1,12 @@
+.team_list_section {
+    padding-bottom: 70px;
+}
+
+.add_program_btn {
+    background-color: var(--primary-color);
+    border: none;
+    width: 130px;
+    height: 30px;
+    color: white;
+    border-radius: 7px;
+}

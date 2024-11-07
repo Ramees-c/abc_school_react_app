@@ -1,0 +1,10 @@
+.team_details_section {
+    padding-bottom: 150px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+

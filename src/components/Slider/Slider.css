@@ -1,0 +1,26 @@
+
+
+.slider_section .slider_heading {
+    font-size: 44px;
+}
+
+.slider_section .para {
+    font-size: 20px;
+}
+
+.slider_section .slider-btn {
+    font-size: 24px;
+}
+@media only screen and (max-width: 600px) {
+    .slider_section .para {
+        display: none;
+    }
+
+    .slider_section .slider_heading {
+        font-size: 20px;
+    }
+
+    .slider_section .slider-btn {
+        font-size: 14px;
+    }
+}
