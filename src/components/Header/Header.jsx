@@ -1,6 +1,7 @@
 import React from "react";
 import "./Header.css";
 import { Container, Nav, Navbar } from "react-bootstrap";
+import { Link} from 'react-router-dom'
 
 function Header() {
   const nav_titles = [
@@ -9,7 +10,7 @@ function Header() {
       display: 'Home',
     },
     {
-      path: '/teams',
+      path: '/userteamlist',
       display: 'Teams',
     },
     {
@@ -30,8 +31,11 @@ function Header() {
               <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="ms-auto">
                   {
-                    nav_titles.map((title) => (
-                      <Nav.Link href="#home" className='me-5 text-white fw-bold fs-5 nav_link'>{title.display}</Nav.Link>
+                    nav_titles.map((title,index) => (
+                      <Link to={title.path} key={index} style={{textDecoration:'none'}}>
+                      
+                      <Nav className='me-5 text-white fw-bold fs-5 nav_link'>{title.display}</Nav>
+                      </Link>
                     ))
                   }
                 </Nav>

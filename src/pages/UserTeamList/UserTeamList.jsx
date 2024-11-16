@@ -1,24 +1,15 @@
-import React, { useState, useEffect, useContext } from "react";
-import AdminHeader from "../../components/AdminHeader/AdminHeader";
-import { Container, Table } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import "./UserTeamList.css";
+import Header from "../../components/Header/Header";
+import { Container, Table, Button } from "react-bootstrap";
 import axios from "axios";
 import { BASE_URL } from "../../ApiService/Api";
-import { AuthContext } from "../../context/authContext";
+import { Link } from "react-router-dom";
 
-function AdminPage() {
-  // States
+function UserTeamList() {
+  // states
   const [teamList, setTeamList] = useState([]);
-  const { user, isAuthenticated } = useContext(AuthContext);
-
-  useEffect(() => {
-    const login = async () => {
-      const response = await axios.post(
-        "http://192.168.1.27:5000/admin/login",
-        { email: "admin@gmail.com", password: "password1" }
-      );
-    };
-    login();
-  }, []);
+  const [sortedTotalScore, setSortedTotalScore] = useState([])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -31,26 +22,36 @@ function AdminPage() {
     };
     fetchData();
   }, []);
+  
 
+  teamList.sort((a, b) => (
+    a-b
+    
+  ))
+  
+  console.log(teamList);
+  
+  
   return (
     <div>
-      <AdminHeader />
+      <Header />
 
-      {/* Team list */}
-      <div className="admin_team_list_section py-5">
+      {/* team list */}
+
+      <div className="user_team_list_section py-5">
         <Container>
           <div className="row">
             <div className="col-lg-12">
-              <div className="heading mb-5">
-                <h1 className="text-center">Team List</h1>
+              <div className="heading">
+                <h1 className="text-center mb-5">Team List</h1>
               </div>
               <div className="table_section">
                 <Table striped bordered hover>
                   <thead>
                     <tr>
-                      <th>ID</th>
-                      <th>Team Name</th>
-                      <th>Team Image</th>
+                      <th>#</th>
+                      <th>Name</th>
+                      <th>Image</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -65,6 +66,11 @@ function AdminPage() {
                             style={{ width: "60px" }}
                           />
                         </td>
+                        <td>
+                          <Link to={`/userprogramlist/${team._id}`}>
+                            <Button>View programs</Button>
+                          </Link>
+                        </td>
                       </tr>
                     ))}
                   </tbody>
@@ -78,4 +84,4 @@ function AdminPage() {
   );
 }
 
-export default AdminPage;
+export default UserTeamList;

@@ -4,8 +4,13 @@ import AdminHeader from "../../components/AdminHeader/AdminHeader";
 import { Container, Form } from "react-bootstrap";
 import axios from "axios";
 import { BASE_URL } from "../../ApiService/Api";
+import { useNavigate } from "react-router-dom";
+
+import Swal from "sweetalert2";
 
 function AddProgramToTeam() {
+  const navigate = useNavigate();
+  // state
   const [team, setTeam] = useState([]);
   const [programs, setPrograms] = useState([]);
   const [isSingle, setIsSingle] = useState();
@@ -24,7 +29,8 @@ function AddProgramToTeam() {
   });
   const [editInput, setEditInput] = useState({});
   const [isValue, setIsValue] = useState(false);
-  const [team_type, setTeam_type] = useState('');
+  const [teamType, setTeamType] = useState("");
+  const [isEdit, setIsEdit] = useState(true);
 
   const handleInput = (e) => {
     const { name, value } = e.target;
@@ -48,42 +54,102 @@ function AddProgramToTeam() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const response = await axios.post(
-        `${BASE_URL}/addTeamToProgram`,
-        getInput
-      );
-      console.log("Post created", response.data);
-    } catch (error) {
-      console.error("Error creating post:", error);
+    if (isEdit === true) {
+      try {
+        const response = await axios.post(
+          `${BASE_URL}/addTeamToProgram`,
+          getInput
+        );
+        console.log("Post created", response.data);
+        navigate("/allteams");
+      } catch (error) {
+        console.error("Error creating post:", error);
+      }
+    } else {
+      try {
+        const response = await axios.put(
+          `${BASE_URL}/editTeamInProgram`,
+          getInput
+        );
+        console.log("Post updated", response.data);
+      } catch (error) {
+        console.error("Error updating post", error);
+      }
     }
   };
-
-  console.log(editInput);
-  
 
   const handleEditProgram = async () => {
     if (getInput.teamId === "" || getInput.teamId === null) {
       setTeamProgramError({ teamError: "Please select team" });
-    } else if (getInput.programId === "" || getInput.programId === null) {
+    } else if (getInput.programId === "") {
       setTeamProgramError({ programError: "Please select program" });
     } else {
-      const response = await axios.get(
-        `${BASE_URL}/getTeamProgramDetails?teamId=${getInput.teamId}&programId=${getInput.programId}`
-      );
-      setEditInput(response.data);
-      if(editInput.isGroup === true) {
-        setTeam_type("Group")
-      } else{
-        setTeam_type("Single")
+      try {
+        const response = await axios.get(
+          `${BASE_URL}/getTeamProgramDetails?teamId=${getInput.teamId}&programId=${getInput.programId}`
+        );
+        setEditInput(response.data);
+        if (editInput.isGroup === true) {
+          setTeamType("group");
+        } else {
+          setTeamType("single");
+        }
+      } catch (error) {
+        console.error("Error getting team program details:", error);
+        setTeamProgramError({ programError: "Program not added in team  " });
       }
     }
-    
+
     setIsValue(true);
+    setIsEdit(false);
   };
 
-  
-  
+  const handleDelete = () => {
+    if (getInput.teamId === "" || getInput.teamId === null) {
+      setTeamProgramError({ teamError: "Please select team" });
+    } else if (getInput.programId === "") {
+      setTeamProgramError({ programError: "Please select program" });
+    } else {
+      const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: "btn btn-success",
+          cancelButton: "btn btn-danger",
+        },
+        buttonsStyling: false,
+      });
+      swalWithBootstrapButtons
+        .fire({
+          title: "Are you sure?",
+          text: "You won't be able to revert this!",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonText: "Yes, delete it!",
+          cancelButtonText: "No, cancel!",
+          reverseButtons: true,
+        })
+        .then((result) => {
+          if (result.isConfirmed) {
+            const response = axios.delete(`${BASE_URL}/deleteTeamFromProgram`);
+            console.log("Deleted", response.data);
+            swalWithBootstrapButtons.fire({
+              title: "Deleted!",
+              text: "Your file has been deleted.",
+              icon: "success",
+            });
+          } else if (
+            /* Read more about handling dismissals below */
+            result.dismiss === Swal.DismissReason.cancel
+          ) {
+            swalWithBootstrapButtons.fire({
+              title: "Cancelled",
+              text: "Your imaginary file is safe :)",
+              icon: "error",
+            });
+          }
+        });
+    }
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       const response = await axios.get(`${BASE_URL}/getAllteams`);
@@ -94,8 +160,6 @@ function AddProgramToTeam() {
     fetchData();
   }, []);
 
-  
-var a = "Single"
   return (
     <div>
       <AdminHeader />
@@ -118,8 +182,10 @@ var a = "Single"
                       onChange={handleInput}
                     >
                       <option>Select a team</option>
-                      {team.map((teams) => (
-                        <option value={teams._id}>{teams.name}</option>
+                      {team.map((teams, index) => (
+                        <option value={teams._id} key={index}>
+                          {teams.name}
+                        </option>
                       ))}
                     </Form.Select>
                     <p style={{ color: "red" }}>{teamProgramError.teamError}</p>
@@ -132,8 +198,10 @@ var a = "Single"
                       onChange={handleInput}
                     >
                       <option>Select a program</option>
-                      {programs.map((program) => (
-                        <option value={program._id}>{program.label}</option>
+                      {programs.map((program, index) => (
+                        <option value={program._id} key={index}>
+                          {program.label}
+                        </option>
                       ))}
                     </Form.Select>
                     <p style={{ color: "red" }}>
@@ -170,7 +238,7 @@ var a = "Single"
                       aria-label="Default select example"
                       name="team_type"
                       onChange={handleInput}
-                      defaultValue=""
+                      value={teamType}
                     >
                       <option>Select team type</option>
                       <option value="single">Single</option>
@@ -178,7 +246,7 @@ var a = "Single"
                     </Form.Select>
 
                     <button type="submit" className="add_team_btn mt-3">
-                      Submit
+                      {isEdit ? "Submit" : "Update"}
                     </button>
                   </Form>
                   <button
@@ -188,7 +256,11 @@ var a = "Single"
                   >
                     Edit
                   </button>
-                  <button type="button" className="del_program_btn mt-3">
+                  <button
+                    type="button"
+                    className="del_program_btn mt-3"
+                    onClick={handleDelete}
+                  >
                     Delete
                   </button>
                 </div>

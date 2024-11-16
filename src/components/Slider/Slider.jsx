@@ -1,7 +1,8 @@
 import React from "react";
 import "./Slider.css";
 import { Carousel,Button } from "react-bootstrap";
-import sliderImg from "../../assets/images/slider_image2.jpg";
+// import sliderImg from "../../assets/images/slider_image2.jpg";
+import sliderImg from "../../assets/images/slider.jpg";
 
 function Slider() {
   return (

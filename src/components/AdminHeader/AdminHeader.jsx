@@ -1,5 +1,6 @@
 import React from 'react'
 import { Container, Nav, Navbar } from "react-bootstrap";
+import { Link } from 'react-router-dom';
 
 function AdminHeader() {
  const nav_titles = [
@@ -21,7 +22,7 @@ function AdminHeader() {
     },
     {
       path: '/addprogramtoteam',
-      display: 'Add Program To Team'
+      display: 'Manage Programs'
     }
       ]
   return (
@@ -37,7 +38,9 @@ function AdminHeader() {
                 <Nav className="ms-auto">
                   {
                     nav_titles.map((titles,index) => (
-                      <Nav.Link href={titles.path} key={index} className='me-5 text-white fw-bold fs-5 nav_link'>{titles.display}</Nav.Link>
+                      <Link to={titles.path} key={index} style={{textDecoration:"none"}}>
+                        <Nav className='me-5 text-white fw-bold fs-5 nav_link'>{titles.display}</Nav>
+                      </Link>
                     ))
                   }
                   

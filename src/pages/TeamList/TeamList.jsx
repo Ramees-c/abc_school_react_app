@@ -28,10 +28,10 @@ function TeamList() {
             <h1 className="text-center">All Teams</h1>
           </div>
           {
-            teamList.map((team) => (
-                <div className="col-lg-3 mb-5">
+            teamList.map((team, index) => (
+                <div key={index} className="col-lg-3 mb-5 ms-5">
             <Card style={{ width: "18rem" }} className='text-center'>
-              <Card.Img variant="top" src={`http://192.168.1.27:5000/teamImages/${team.image}`} />
+              <Card.Img variant="top" src={`http://192.168.1.27:5000/teamImages/${team.image}`} style={{height:'200px'}} />
               <Card.Body>
                 <Card.Title>{team.name}</Card.Title>
                 <Link to={`/teamdetails/${team._id}`}>
