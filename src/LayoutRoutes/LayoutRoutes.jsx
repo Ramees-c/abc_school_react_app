@@ -29,6 +29,7 @@ function LayoutRoutes() {
     <>
       <Routes>
         <Route path="/" element={<UserHome />} />
+        <Route path="/abc_school_react_app" element={<UserHome />} />
 
         <Route path="/login" element={<Login />} />
         {isAuthenticated ? (
