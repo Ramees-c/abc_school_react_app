@@ -33,7 +33,7 @@ function UserProgramList() {
             </div>
             <div className="col-lg-12 mb-5">
               <img
-                src={`http://192.168.1.27:5000/teamImages/${programDetails.image}`}
+                src={`http://192.168.1.16:5000/teamImages/${programDetails.image}`}
                 alt={programDetails.image}
                 style={{ width: "100px", height: "80px" }}
               />

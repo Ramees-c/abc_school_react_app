@@ -21,8 +21,6 @@ function Login() {
     setGetInput((prevState) => ({ ...prevState, [name]: value }));
   };
 
-
-  
   return (
     // Login section
     <div className="login_section">

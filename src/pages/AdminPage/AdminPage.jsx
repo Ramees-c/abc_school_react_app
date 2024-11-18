@@ -8,17 +8,8 @@ import { AuthContext } from "../../context/authContext";
 function AdminPage() {
   // States
   const [teamList, setTeamList] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const { user, isAuthenticated } = useContext(AuthContext);
-
-  useEffect(() => {
-    const login = async () => {
-      const response = await axios.post(
-        "http://192.168.1.27:5000/admin/login",
-        { email: "admin@gmail.com", password: "password1" }
-      );
-    };
-    login();
-  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -31,6 +22,8 @@ function AdminPage() {
     };
     fetchData();
   }, []);
+
+  
 
   return (
     <div>

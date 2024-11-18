@@ -25,10 +25,6 @@ import FourNotFout from "../components/FourNotFour/FourNotFout";
 function LayoutRoutes() {
   const { user, isAuthenticated } = useContext(AuthContext);
 
- 
-  
-  
-
   return (
     <>
       <Routes>

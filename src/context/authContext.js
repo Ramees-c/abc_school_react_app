@@ -13,7 +13,7 @@ function AuthProvider({ children }) {
     e.preventDefault();
     try {
       const response = await axios.post(
-        `http://192.168.1.27:5000/admin/login`,
+        `http://192.168.1.16:5000/admin/login`,
         data
       );
       console.log("Login Success", response);
@@ -27,7 +27,7 @@ function AuthProvider({ children }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, isAuthenticated }}>
+    <AuthContext.Provider value={{ user, login, isAuthenticated, setIsAuthenticated }}>
       {children}
     </AuthContext.Provider>
   );
