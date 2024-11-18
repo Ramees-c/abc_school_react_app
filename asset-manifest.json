@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/abc_school_react_app/static/css/main.aee5e7b2.css",
+    "main.js": "/abc_school_react_app/static/js/main.2082931a.js",
+    "static/media/about_image.jpg": "/abc_school_react_app/static/media/about_image.bc61b22e97af4c9d11eb.jpg",
+    "static/media/login_img.jpg": "/abc_school_react_app/static/media/login_img.3c2289268e04951f867e.jpg",
+    "static/media/signup_image.jpg": "/abc_school_react_app/static/media/signup_image.be59868f721d3157808f.jpg",
+    "static/media/features2.png": "/abc_school_react_app/static/media/features2.5d34486f9d36101394ca.png",
+    "static/media/slider.jpg": "/abc_school_react_app/static/media/slider.e698e99e7300d6ad17b3.jpg",
+    "static/media/features6.png": "/abc_school_react_app/static/media/features6.697f3ca9e85a7173f60c.png",
+    "static/media/features5.png": "/abc_school_react_app/static/media/features5.5b32d0e27863a2e19160.png",
+    "index.html": "/abc_school_react_app/index.html",
+    "main.aee5e7b2.css.map": "/abc_school_react_app/static/css/main.aee5e7b2.css.map",
+    "main.2082931a.js.map": "/abc_school_react_app/static/js/main.2082931a.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.aee5e7b2.css",
+    "static/js/main.2082931a.js"
+  ]
+}
